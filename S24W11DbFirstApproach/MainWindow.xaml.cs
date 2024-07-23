@@ -91,5 +91,37 @@ namespace S24W11DbFirstApproach
             LoadStudents();
             MessageBox.Show("Student updated");
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(txtId.Text);
+            var std = db.Students.Find(id);
+
+            db.Students.Remove(std);
+
+            db.SaveChanges();
+            LoadStudents();
+            MessageBox.Show("Student deleted");
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string name = txtName.Text;
+
+            // LINQ - Language INtegreted Query
+
+            // query syntax
+            //var students = (from std in db.Students
+            //               where std.StudentName.Contains(name)
+            //               select std).ToList();
+
+            // method syntax
+            var students = db.Students
+                            .Where(s => s.StudentName.Contains(name))
+                            .ToList();
+
+
+            grdStudents.ItemsSource = students;
+        }
     }
 }
