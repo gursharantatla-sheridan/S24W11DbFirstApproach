@@ -78,5 +78,18 @@ namespace S24W11DbFirstApproach
             LoadStudents();
             MessageBox.Show("New student added");
         }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(txtId.Text);
+            var std = db.Students.Find(id);
+
+            std.StudentName = txtName.Text;
+            std.StandardId = (int)cmbStandard.SelectedValue;
+
+            db.SaveChanges();
+            LoadStudents();
+            MessageBox.Show("Student updated");
+        }
     }
 }
