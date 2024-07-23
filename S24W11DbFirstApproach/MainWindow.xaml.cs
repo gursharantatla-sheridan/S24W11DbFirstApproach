@@ -30,7 +30,11 @@ namespace S24W11DbFirstApproach
 
         private void LoadStudents()
         {
-            var students = db.Students.ToList();
+            //var students = db.Students.ToList();
+
+            var students = (from std in db.Students
+                           select new { std.StudentID, std.StudentName, std.Standard.StandardName }).ToList();
+
             grdStudents.ItemsSource = students;
         }
 
